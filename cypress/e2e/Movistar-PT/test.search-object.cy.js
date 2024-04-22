@@ -8,10 +8,13 @@ describe("Search object in web", () => {
 
   it("The existence of an object or its non-existence is validated", () => {
     cy.wait(2000);
-
-    cy.contains(".hrefch", "Samsung galaxy s6").then((element) => {
+    // seleccionamos el selector de los elementos
+    cy.get(".col-lg-4.col-md-6.mb-4").then((element) => {
+      // validamos
       if (element.length > 0) {
-        cy.wrap(element).click();
+        const indexRandom = Math.floor(Math.random() * element.length);
+        const articleRandom = element[indexRandom];
+        cy.wrap(articleRandom).contains("a").click();
         cy.wait(2000);
         cy.screenshot("taking capture of the element");
       } else {

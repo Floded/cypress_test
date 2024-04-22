@@ -1,6 +1,5 @@
 const { login } = require("../../support/POM/Login_movistar");
 const { indexEndpoint } = Cypress.env("EndpointData");
-const { product } = Cypress.env("ProductName");
 const { username, password } = Cypress.env("AdminData");
 
 describe("implement modules for login and search", () => {
