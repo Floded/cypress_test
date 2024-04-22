@@ -1,8 +1,7 @@
-import { generateRandonData } from "../../helpers/generateRandom.help";
-import { login } from "../../support/POM/Login_movistar";
-
+const { login } = require("../../support/POM/Login_movistar");
 const { indexEndpoint } = Cypress.env("EndpointData");
 const { product } = Cypress.env("ProductName");
+const { username, password } = Cypress.env("AdminData");
 
 describe("implement modules for login and search", () => {
   beforeEach("Visit web site", () => {
@@ -10,31 +9,26 @@ describe("implement modules for login and search", () => {
   });
 
   it("Login and search element test", () => {
-    // Generate user random
-
-    const username = generateRandonData.generate();
-    const password = generateRandonData.generate();
-
-    // const username = "flooded";
-    // const password = "123456";
-
-    // Register new user
-
-    login.signUpModule(username, password);
-
-    cy.wait(2000);
+    //TODO: crear un modulo reusable para el login y usarlo aqui.
 
     // Login user
 
-    login.loginModule(username, password);
+    cy.loginModule(username, password);
 
     cy.wait(2000);
 
+    //TODO: crear un modulo reusable de busqueda de articulo y usarlo aqui.
+    //TODO: registrar evidencia por medio de un log.
+
     // Search product
-    login.purchaseProduct(product);
+
+    cy.searchArticleModule("Nexus 6");
+    cy.wait(2000);
+
+    //TODO: hacer logout de la web.
 
     // Logout
 
-    login.logoutModule();
+    login.clickLogoutSession();
   });
 });

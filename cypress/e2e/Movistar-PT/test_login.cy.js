@@ -10,9 +10,13 @@ describe("Test register, login and logout", () => {
   // Case 1:
 
   it("registration, login and logout test is performed", () => {
+    //Todo: crear una funcion para generar usuarios y contraseñas random
     // Fn help
     const username = generateRandonData.generate();
     const password = generateRandonData.generate();
+
+    //TODO: registrar un nuevo usuario
+
     // Register User
 
     login.clickSignUpButton();
@@ -21,20 +25,28 @@ describe("Test register, login and logout", () => {
     login.clickSRegisterButton();
     cy.wait(2000);
 
-    // Login User
+    //TODO: iniciar sesion con el nuevo usuario creado
 
-    login.pickLoginButton();
-    login.enterUsername(username); // en caso de fallo: "flooded"
-    login.enterPassword(password); // en caso de fallo: "123456"
-    login.clickSubmitButton();
-    cy.wait(2000);
+    // Login User
+    if (login.logoutConfirm()) {
+      cy.log("you are online");
+    } else {
+      login.pickLoginButton();
+      login.enterUsername(username); // en caso de fallo: "flooded"
+      login.enterPassword(password); // en caso de fallo: "123456"
+      login.clickSubmitButton();
+      cy.wait(2000);
+    }
+
+    //TODO: validar que se haya iniciado sesion correctamente
+
     // validate login succssesfuly
     login.welcomButtonConfirm(username); // en caso de fallo: "flooded"
+
+    //TODO: finalmente cerrar sesion.
 
     // Logout User
 
     login.logoutModule();
-
-    login.clickHomePage();
   });
 });

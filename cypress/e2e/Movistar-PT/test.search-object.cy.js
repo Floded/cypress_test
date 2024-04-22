@@ -6,18 +6,20 @@ describe("Search object in web", () => {
     cy.visit(`/${indexEndpoint}`);
   });
 
-  // Case 2:
-
-  //   buscar el selector.. entrar y elegir un elemento de la lista y compararlo con un array de elementos aleatorios para validar
   it("The existence of an object or its non-existence is validated", () => {
-    cy.contains("a", `${product}`).then((prod) => {
-      if (prod.length != 0) {
-        cy.contains("a", `${product}`).should("exist");
-        cy.contains("a", `${product}`).click();
+    //TODO: verificar que el elemento se encuentre en la pagina.
+
+    // cy.loginModule("flooded", "123456");
+
+    cy.wait(2000);
+
+    cy.contains(".hrefch", "Samsung galaxy s6").then((element) => {
+      if (element.length > 0) {
+        cy.wrap(element).click();
         cy.wait(2000);
-        cy.screenshot("finded");
+        cy.screenshot("taking capture of the element");
       } else {
-        throw new Error("Product not found");
+        cy.log("no hay articulo");
       }
     });
   });

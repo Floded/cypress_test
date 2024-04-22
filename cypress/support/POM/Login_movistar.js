@@ -100,32 +100,21 @@ class Login {
   }
 
   loginModule(username, password) {
-    this.pickLoginButton();
-    this.enterUsername(username); // en caso de fallo: "flooded"
-    this.enterPassword(password); // en caso de fallo: "123456"
-    this.clickSubmitButton();
-    this.welcomButtonConfirm(username);
+    if (!login.logoutConfirm()) {
+      cy.log("you are online");
+    } else {
+      login.pickLoginButton();
+      login.enterUsername(username); // en caso de fallo: "flooded"
+      login.enterPassword(password); // en caso de fallo: "123456"
+      login.clickSubmitButton();
+      cy.wait(2000);
+    }
   }
 
   // Pick Category
 
   pickLaptopCategory() {
     this.get.laptopCategory().click();
-  }
-
-  // Products
-
-  purchaseProduct(data) {
-    cy.contains("a", `${data}`).then((prod) => {
-      if (prod.length != 0) {
-        cy.contains("a", `${data}`).should("exist");
-        cy.contains("a", `${data}`).click();
-        cy.wait(2000);
-        cy.screenshot("finded");
-      } else {
-        throw new Error("No se encuentra el producto");
-      }
-    });
   }
 }
 
