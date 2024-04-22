@@ -7,10 +7,6 @@ describe("Search object in web", () => {
   });
 
   it("The existence of an object or its non-existence is validated", () => {
-    //TODO: verificar que el elemento se encuentre en la pagina.
-
-    // cy.loginModule("flooded", "123456");
-
     cy.wait(2000);
 
     cy.contains(".hrefch", "Samsung galaxy s6").then((element) => {
@@ -19,7 +15,7 @@ describe("Search object in web", () => {
         cy.wait(2000);
         cy.screenshot("taking capture of the element");
       } else {
-        cy.log("no hay articulo");
+        cy.log("not found");
       }
     });
   });

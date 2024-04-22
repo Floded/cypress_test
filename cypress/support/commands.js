@@ -13,7 +13,7 @@ Cypress.Commands.add("searchArticleModule", (article) => {
       cy.wait(2000);
       cy.screenshot("taking capture of the element");
     } else {
-      cy.log("no hay articulo");
+      cy.log("not found");
     }
   });
 });
